@@ -8,7 +8,7 @@ export default function CompressedFileView(props) {
     const getCharacters = () => {
         const chars = []
        for (let a = 0; a < props.text.length; a++) {
-            if (!characters.includes(props.text[a])) {
+            if (!chars.includes(props.text[a])) {
                 chars.push(props.text[a])
             }
         }
