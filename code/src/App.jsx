@@ -36,9 +36,38 @@ function App() {
 
   return (
     <NextUIProvider className={(dark) ? 'dark text-foreground bg-background' : ""}>
-      
-      <div>
-        <Nav showAlert={showAlert} text={alert} updateTheme={updateDark} theme={ dark} />
+              <Nav showAlert={showAlert} text={alert} updateTheme={updateDark} theme={ dark} />
+
+      <div className=' flex flex-row justify-center  items-center'>
+        {/* Alert section */}
+        <div
+  className="absolute z-100 flex justify-center"
+  style={{
+    width: "100%",
+    height: "100%", // Makes it cover the entire parent height
+    top: 0,        // Ensure it aligns to the top of the screen
+    left: 0,       // Ensure it aligns to the left of the screen
+  }}
+>
+  <AnimatePresence>
+    {showAlert && (
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          zIndex: "200",
+          marginTop: "10px",
+          position: "absolute",
+          width: "auto", // Ensure alert doesn't stretch across full width
+        }}
+      >
+        <Alert className="h-36" color="danger" title={alert} />
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
       
 
       <Routes>

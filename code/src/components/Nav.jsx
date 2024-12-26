@@ -47,28 +47,7 @@ export default function Nav(props) {
           <LogoCard />
         </NavbarBrand>
         
-        {/* Alert section */}
-        <div className="absolute z-100" style={{ width: "100%" }}>
-          <AnimatePresence>
-            {props.showAlert && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                style={{
-                  marginTop: "10px", 
-                  position: "absolute",
-                  left: "20%",
-                  transform: "translateX(-50%)",
-                  width: "auto", // Ensure alert doesn't stretch across full width
-                }}
-              >
-                <Alert className="h-36" color="danger" title={ props.text } />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+        
 
         {/* Navbar content aligned to the right */}
         <NavbarContent justify="flex-end" className="ml-auto">

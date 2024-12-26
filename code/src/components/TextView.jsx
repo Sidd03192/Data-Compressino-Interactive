@@ -10,6 +10,7 @@ export const TextView = (props) => {
   const [total, setTotal] = useState();
   const [freqMap, setFreqMap] = useState([]);
   const [confetti, setConfetti] = useState(false);
+  
 
   const highlightCondition = (char) => {
     char = char.toLowerCase();
@@ -82,11 +83,12 @@ export const TextView = (props) => {
         count++;
       }
     }
+    console.log(props.update)
     console.log(count + " count");
     let newTotal = (count / (1.0 * props.text.length) * 100)
     setTotal((isNaN(newTotal)) ? 0 : newTotal);
     console.log("updated total" + count + newTotal);
-  }, [props.dictionary, props.text, props.cheat]);
+  }, [props.dictionary, props.text]);
   
   
   // scroll refs
@@ -136,7 +138,8 @@ export const TextView = (props) => {
               
               {/* for each character, displays as object in  */}
                 {props.text.split('').map((char, index) => (
-                    <span className="text-sm  overscroll-contain rounded-sm "
+                  <span className="text-sm  overscroll-contain rounded-sm "
+                    
                     key={index}
                     style={{
                         backgroundColor: highlightCondition(char) ? '#90EE90' : 'transparent',

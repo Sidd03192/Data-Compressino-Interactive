@@ -1,6 +1,5 @@
 import React from 'react'
 import "../Global.css"
-import ParticleBackground from '../components/background'
  
 export default function Home() {
   return (
