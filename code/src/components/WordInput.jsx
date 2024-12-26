@@ -73,7 +73,7 @@ export default function WordInput(props) {
         },
         {
             key: "delete",
-            label: "actions"
+            label: "Actions"
       }
     ];
     
