@@ -44,7 +44,9 @@ export default function Nav(props) {
       >
         {/* Brand/logo on the left */}
         <NavbarBrand className="z-11">
-          <LogoCard />
+          <Link className='w-full h-full' to="/">           <LogoCard />
+
+          </Link>
         </NavbarBrand>
         
         
@@ -54,7 +56,7 @@ export default function Nav(props) {
           <NavbarItem>
             
             <Tooltip content="Compression Interactive">
-              <Link to="/about"> <p style={{fontWeight: "bold"}}>Compression</p></Link>
+              <Link to="/compressionInteractive"> <p style={{fontWeight: "bold"}}>Compression</p></Link>
             </Tooltip> 
 
           </NavbarItem>
