@@ -5,8 +5,10 @@ import {Divider, Progress, Tabs, Tab} from "@nextui-org/react";
 import DictionaryTable from "./DictionaryTable";
 import { IoMdAdd } from "react-icons/io";
 import { TextView } from "./TextView";
+import { MdClear } from "react-icons/md";
 import { FileView } from "./FileView";
 import "../Global.css"
+import { label } from "framer-motion/client";
 export const DeleteIcon = (props, ) => {
     return (
       <svg
@@ -77,8 +79,11 @@ export default function WordInput(props) {
       }
     ];
     
-  const [text, setText] = React.useState("");
-  const [dictionary, setDictionary] = React.useState([]);
+  const [text, setText] = React.useState("You might not think that programmers are artists, but programming is an extremely creative profession. It’s logic-based creativity.” – John Romero, video game developer and programmer");
+  const [dictionary, setDictionary] = React.useState([
+    { key: "d", value: "d" },
+    { key: "a", value: "a" }, 
+  ]);
   const [percent, setPercent] = React.useState(10);
   const [rows, setRows] = React.useState();
   const [letter, setLetter] = React.useState("");
@@ -90,7 +95,7 @@ export default function WordInput(props) {
   }
   const updateDictionary = () => {
     if (letter != "") {
-      if ((dictionary.length >= 4 && inputType) ) {
+      if ((dictionary.length >= 10 && inputType) ) {
         props.showAlert("You can't add more than 4 items to the dictionary in this input format. Please change input format / remove an item from the dictionary :) "); // calls update function in parent to send alert !
       
       } else if (letter.length > 1) {
@@ -156,12 +161,15 @@ export default function WordInput(props) {
                 <div className="h-full flex flex-col justify-between " style={{marginTop: "5vh"}}>
             <DictionaryTable columns={columns} rows={dictionary} deleteItem={deleteDictionaryItem} text={text} dictionary = {dictionary} />
                 
-                <div className="flex justify-between mt-5" style={{ marginTop: "10px" }} >
-                <Input placeholder="Add to dictionary..."  variant="bordered" style={{height:"100%"}} value={letter} onValueChange={setLetter}/>     
-                    <Button  className="w-full" variant="ghost" color="warning" style={{marginLeft: "5px", fontSize: "1.7vh"}} onPress={updateDictionary}>
+                <div className="flex  justify-between mt-5" style={{ marginTop: "10px" }} >
+                  <div className="flex flex-col w-full">
+                  <Input placeholder="Add to dictionary..."  variant="bordered" style={{height:"100%"}} value={letter} onValueChange={setLetter}/>     
+                    <Button  className="w-full" variant={(letter == "") ? "ghost" : "solid"} color="warning" style={{ fontSize: "1.7vh", marginTop: "5px"}} onPress={updateDictionary}>
                     Add a Letter <IoMdAdd/>
                     </Button> 
-                    <Button className="w-full" variant="ghost" color="danger" style={{marginLeft: "5px", fontSize: "1.7vh"}} onPress={clear}>Clear Dictionary</Button>
+                  </div>
+                    <Divider orientation="vertical" style={{marginLeft: "10px", marginRight: "10px"}}></Divider>
+                    <Button className="w-3/5 h-full" variant="ghost" color="danger" style={{marginLeft: "5px", fontSize: "1.7vh", width: "40%"}} onPress={clear}>Clear Dictionary <MdClear/></Button>
                   </div>
             </div>
         </div>

@@ -72,7 +72,7 @@ function App() {
 
       <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<Dictionary style={{height: "screen", overflow: "hidden"}} handleAction={handleAction} theme={dark}  />
+          <Route path="/compressioninteractive" element={<Dictionary style={{height: "screen", overflow: "hidden"}} handleAction={handleAction} theme={dark}  />
 } />
             
       </Routes>

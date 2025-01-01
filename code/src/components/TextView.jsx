@@ -53,7 +53,7 @@ export const TextView = (props) => {
     let totalFrequencies = 0;
   
     // Build the charFrequencyArray and only keep the first 4 values
-    freqArray.slice(0, 4).forEach((item, index) => {
+    freqArray.slice(0, 10).forEach((item, index) => {
       totalFrequencies += item.frequency; // Cumulative frequency
       charFrequencyArray.push({ charsUsed: index + 1, totalFreq: totalFrequencies });
     });
@@ -118,8 +118,8 @@ export const TextView = (props) => {
                       maxRows={4}
                       isClearable
                       defaultValue="Include Text Here For Compression."
-                      label="Description"
-                      placeholder="Description"
+                      label="Text To Compress"
+                      placeholder="Include Text To Compress Here !"
                       variant="bordered"
                       size="lg"
                       value={props.text}
@@ -128,6 +128,12 @@ export const TextView = (props) => {
                       className="flex-grow text-medium" // Ensures the Textarea takes available space
                 />
 
+            <div className='text-center' style={{alignContent:"center"}}>
+            <h1 style={{ fontWeight: "bold", fontSize: "2.5vh", fontFamily: "poppins", alignContent: "center" }}> Compressed Text:</h1>
+            <p className='font-semibold'>The <span  className="rounded-md "style={{backgroundColor: "#90EE90", marginRight:"3px", padding:"2px"}}>highlighted</span>
+             characters represent the characters that are coded in your dictionary.</p>
+
+            </div>
             <div className="text text-medium mt-11"
                 onScroll={syncScroll}
                 ref={divRef}
