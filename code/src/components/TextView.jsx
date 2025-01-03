@@ -100,6 +100,9 @@ export const TextView = (props) => {
     frequencyCharArray();
   }, [props.text]);
 
+
+
+  
   useEffect(() => {
     let count = 0;
     let i = 0;
@@ -116,14 +119,6 @@ export const TextView = (props) => {
 
     const newTotal = (count / (1.0 * props.text.length)) * 100;
     setTotal(isNaN(newTotal) ? 0 : newTotal);
-
-  
-
-
-
-
-
-
 
   }, [props.dictionary, props.text]);
 
@@ -220,23 +215,7 @@ export const TextView = (props) => {
 
       <Tooltip
         content={ "When the text is at max compression with 10 dictionary elements, this bar will become green!"
-          // <Table isStriped aria-label="Example table with dynamic content">
-          //   <TableHeader>
-          //     {columns.map((column) => (
-          //       <TableColumn key={column.key} style={{ fontSize: "1.5vh" }}>
-          //         {column.label}{" "}
-          //       </TableColumn>
-          //     ))}
-          //   </TableHeader>
-          //   <TableBody emptyContent={"No rows to display."}>
-          //     {freqMap.map((row) => (
-          //       <TableRow key={row}>
-          //         <TableCell>{row.charsUsed}</TableCell>
-          //         <TableCell>{((row.totalFreq / (1.0 * props.text.length)) * 100).toFixed(2) + "%"}</TableCell>
-          //       </TableRow>
-          //     ))}
-          //   </TableBody>
-          // </Table>
+          
         }
       >
         <Progress

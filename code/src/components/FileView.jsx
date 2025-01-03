@@ -180,7 +180,7 @@ export const FileView = (props) => {
           {/* File input field restricted to text files */}
       
       <section className='flex flex-row justify-center w-full ' style={{ marginTop: "5vh"}}>
-        <label style={{ zIndex: "100"}} className="fileupload cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-400 w-full"
+        <label style={{ zIndex: "2"}} className="fileupload cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-400 w-full"
           >
             {(fileName == "") ? "Upload a File" : fileName}
             <input

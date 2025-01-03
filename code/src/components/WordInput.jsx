@@ -79,11 +79,12 @@ export default function WordInput(props) {
       }
     ];
     
-  const [text, setText] = React.useState("You might not think that programmers are artists, but programming is an extremely creative profession. It’s logic-based creativity.” – John Romero, video game developer and programmer");
+  const [text, setText] = React.useState("Pease porridge hot, pease porridge cold,Pease porridge in the pot, nine days old; Some like it hot, some like it cold, Some like it in the pot, nine days old.");
   const [dictionary, setDictionary] = React.useState([
-    { key: "d", value: "d" },
-    { key: "a", value: "a" }, 
-    {key:"program", value:"program"}
+    { key: "p", value: "p" },
+    { key: "e", value: "e" }, 
+    { key: "a", value: "a" },
+    {key:"s", value: "s"}
   ]);
   const [percent, setPercent] = React.useState(10);
   const [rows, setRows] = React.useState();
@@ -94,34 +95,34 @@ export default function WordInput(props) {
     setDictionary([]);
   }
   const updateDictionary = () => {
-    if (letter != "") {
-      if ((dictionary.length >= 10 ) ) {
-        props.showAlert("You can't add more than 4 items to the dictionary in this input format. Please change input format / remove an item from the dictionary :) "); // calls update function in parent to send alert !
-      
-      } 
-      else {
-        // logic for setting count etc...
-        let add = true;
-        for (let i = 0; i < dictionary.length; i++) {
-          if (dictionary[i].key == letter) {
-            add = false;
-            props.showAlert("You can't add repeats to the Dictionary!")
-          }
+    if (letter.trim() !== "") {
+      if (dictionary.length >= 10) {
+        props.showAlert(
+          "You can't add more than 10 items to the dictionary in this input format. Please change input format / remove an item from the dictionary :)"
+        );
+      } else {
+        // Check for duplicates
+        const isDuplicate = dictionary.some((item) => item.key === letter.toLowerCase());
+        if (isDuplicate) {
+          props.showAlert("You can't add repeats to the Dictionary!");
+        } else {
+          // Add new entry
+          const newDictionary = [
+            ...dictionary,
+            {
+              key: letter.toLowerCase(),
+              value: letter.toLowerCase(),
+            },
+          ];
+          setDictionary(newDictionary); // Ensure React detects the change
+          console.log("Updated Dictionary");
+          setCheat(letter);
         }
-        if (add) {
-          dictionary.push({
-            key: letter.toLowerCase(),
-            value: letter.toLowerCase(), 
-          });
-          let dic = dictionary;
-          dic.sort((a, b) => a.length - b.length); 
-          setDictionary(dic);
-          setCheat(letter)
-        } 
-        setLetter('');
-        }
+        setLetter("");
+      }
     }
-  }
+  };
+  
   
   const tabs = ["Text Input", "File Input"]
   const deleteDictionaryItem = (key) => {

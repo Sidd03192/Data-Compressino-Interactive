@@ -1,6 +1,7 @@
 import React from 'react'
 import {Table, TableHeader, Button, TableColumn, TableBody, Tooltip, TableRow, TableCell, getKeyValue, Divider, Progress} from "@nextui-org/react";
 import { useState } from 'react';
+import "../Global.css"
 export default function DictionaryTable(props) {
  
   
@@ -76,11 +77,11 @@ export default function DictionaryTable(props) {
   
 
   return (
-    <div>
-      <Table isStriped aria-label="Example table with dynamic content">
-                    <TableHeader>
+    <div className='' style={{maxHeight:"44vh", overflowY:"scroll", padding:"20px"}}>
+      <Table  aria-label="Example table with dynamic content">
+                    <TableHeader className='bg-blue-500' color="secondary">
                         {props.columns.map((column) =>
-                            <TableColumn key={column.key} style={{fontSize: "1.5vh"}}>{column.label} </TableColumn>
+                            <TableColumn className='font-bold font-black' key={column.key} style={{fontSize: "1.5vh"}}>{column.label} </TableColumn>
                         )}
                     </TableHeader>
                     <TableBody  emptyContent={"No rows to display."}>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { ModalBody, ModalHeader, Tooltip, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Link } from '@nextui-org/react';
 import { colors } from '@nextui-org/react';
+import "../Global.css"
 export default function CompressedFileView(props) {
   const [characters, setCharacters] = useState([]);
   const colors = [
@@ -89,14 +90,20 @@ export default function CompressedFileView(props) {
   };
   return (
     <>
-      <ModalHeader className="flex justify-center">
+      <ModalHeader className="flex justify-center z-1000" >
         <p>File Comparison Viewer: {props.fileName}</p>
       </ModalHeader>
-      <ModalHeader className="flex justify-evenly" style={{ justifyContent: "space-around" }}>
+      <ModalHeader className="flex justify-evenly" style={{ justifyContent: "space-around"  }}>
         <p>Raw File</p>
-        <Tooltip
+        <Tooltip style={{ paddingTop: "30px", }}
           content={
-            <Table isStriped aria-label="Character Information Table">
+            <div className='ss' style={{ paddingTop: "8px", maxHeight:"60vh", overflowY:"scroll"}} >
+
+          
+            <Table removeWrapper style={{overflow:"scroll"}} className='max-h-[100px]' aria-label="Character Information Table" classNames={{
+        base: "max-h-[100px] overflow-scroll",
+        table: "min-h-[99px]",
+      }}>
               <TableHeader>
                 {columns.map((column) => (
                   <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -112,7 +119,8 @@ export default function CompressedFileView(props) {
                   </TableRow>
                 ))}
               </TableBody>
-            </Table>
+              </Table>
+              </div>
           }
         >
           <Link showAnchorIcon>Compressed File:</Link>
@@ -131,6 +139,7 @@ export default function CompressedFileView(props) {
     overflowWrap: "break-word", // Existing: Ensures breaking of words when needed
     wordBreak: "break-word", // Added: Breaks long sequences like 0s and 1s
     whiteSpace: "pre-wrap", // Optional: Preserves spacing but still allows breaking
+    zIndex: "200",
   }}
 >
   <p>{props.rawFile.length > 0 ? renderHighlightedText(props.rawFile) : "Error"}</p>
