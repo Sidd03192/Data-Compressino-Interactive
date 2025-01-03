@@ -170,7 +170,7 @@ export default function WordInput(props) {
                   </div>
                     <Divider orientation="vertical" style={{marginLeft: "10px", marginRight: "10px"}}></Divider>
                     <Button className="w-3/5 h-full" variant="ghost" color="danger"  style={{marginLeft: "5px", fontSize: "1.7vh", width: "40%"}} onPress={clear}>Clear Dictionary <MdClear/></Button>
-                  </div>
+                  </div >
             </div>
         </div>
         
