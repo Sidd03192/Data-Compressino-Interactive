@@ -1,6 +1,6 @@
 import React, { use } from 'react'
 import { useState } from 'react'
-import { Button, Card, CardBody, Link, Tooltip, useDisclosure, Modal, ModalBody, ModalContent } from '@nextui-org/react'
+import { Button, Card, CardBody, Link, Tooltip, useDisclosure, Modal, ModalBody, ModalContent, input } from '@nextui-org/react'
 import CompressedFileView from './CompressedFileView';
 import { MdOutlineCompress } from "react-icons/md";
 
@@ -107,12 +107,54 @@ export const FileView = (props) => {
     setCompressed(compressedArray);
     setCompressions(count);
     setLoading(false);
-  
+    toBinaryAgain();
     // Ensure this is being called
     onOpen();
   };
   
   
+  
+  const toBinaryAgain = () => {
+    const binaryArray = [];
+    let remainingContent = fileContent;
+  
+    while (remainingContent.length > 0) {
+      let matched = false;
+  
+      // Check for dictionary entries at the beginning of the remainingContent
+      for (const entry of props.dictionary) {
+        if (remainingContent.startsWith(entry.key)) {
+          // Convert the dictionary entry to binary and add it to the array
+          const binaryWord = entry.key
+            .split("")
+            .map((char) => char.charCodeAt(0).toString(2).padStart(8, '0'))
+            .join("");
+          binaryArray.push(binaryWord);
+  
+          // Remove the matched dictionary entry from the remaining content
+          remainingContent = remainingContent.slice(entry.key.length);
+          matched = true;
+          break;
+        }
+      }
+  
+      if (!matched) {
+        // No dictionary match, process the first character as binary
+        const char = remainingContent[0];
+        const binaryChar = char.charCodeAt(0).toString(2).padStart(8, '0');
+        binaryArray.push(binaryChar);
+  
+        // Remove the processed character from the remaining content
+        remainingContent = remainingContent.slice(1);
+      }
+    }
+  
+    // Update the state
+    setFileAsBinary(binaryArray);
+  
+    // Debug log
+    console.log("Binary Array:", binaryArray);
+  };
   
   
   
@@ -121,6 +163,7 @@ export const FileView = (props) => {
  // need to show file as binary and file as compressed.
   
   return (
+    
     <div className="h-full flex flex-col justify-start">
           <Card style={{width: "100%", height:"30vh"}}>
               <CardBody style={{width: "100%", overflowX: "wrap"}}>
@@ -137,7 +180,7 @@ export const FileView = (props) => {
           {/* File input field restricted to text files */}
       
       <section className='flex flex-row justify-center w-full ' style={{ marginTop: "5vh"}}>
-          <label className="fileupload cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-400 w-full"
+        <label style={{ zIndex: "100"}} className="fileupload cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-400 w-full"
           >
             {(fileName == "") ? "Upload a File" : fileName}
             <input
@@ -145,7 +188,8 @@ export const FileView = (props) => {
               type="file"
               accept=".txt"
             onChange={handleFileChange}
-              className="hidden"
+            className="hidden"
+            
             />
           </label>
 

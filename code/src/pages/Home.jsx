@@ -1,7 +1,12 @@
 import React from 'react'
 import "../Global.css"
- 
+import { useState } from 'react';
 export default function Home() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
   return (
   <>
   
@@ -9,7 +14,9 @@ export default function Home() {
       className='w-full flex text-center justify-center items-center' 
       style={{ height: "93vh", flexDirection: "column" }} // Added vertical alignment styles
       >
-
+        <div>
+      <input type="file" onChange={handleFileChange} />
+    </div>
       <section className="w-full text-center">
         <span 
           style={{ fontSize: "14vh", fontWeight: "bold" }} 

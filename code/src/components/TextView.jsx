@@ -210,16 +210,11 @@ export const TextView = (props) => {
         className="text text-medium mt-11"
         onScroll={syncScroll}
         ref={divRef}
-        style={{
-          whiteSpace: "pre-wrap",
-          fontSize: "1.0rem",
-          width: "100%",
-          overflowY: "scroll", // Hide overflowing content
-          wordWrap: "break-word", // Handle long unbroken strings
-          overflowWrap: "break-word",
-          letterSpacing: "2px",
-        }}
-      >
+        style={{ whiteSpace: 'pre-wrap', fontSize: "1.2rem", width: "100%", overflowY: 'scroll', // Hide overflowing content
+          wordWrap: 'break-word', // Handle long unbroken strings
+              overflowWrap: 'break-word', letterSpacing: "2px"
+      }}>
+      
         {renderHighlightedText()}
       </div>
 

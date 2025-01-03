@@ -163,7 +163,7 @@ export default function WordInput(props) {
                 
                 <div className="flex  justify-between mt-5" style={{ marginTop: "10px" }} >
                   <div className="flex flex-col w-full">
-                  <Input placeholder="Add to dictionary..."  variant="bordered" style={{height:"100%"}} value={letter} onValueChange={setLetter} autoFocus/>     
+                  <Input placeholder="Add to dictionary..."  variant="bordered" style={{height:"100%"}} value={letter} onValueChange={setLetter} autoFocus color="warning"/>     
                     <Button  className="w-full" isDisabled={letter.length <=0}  variant={(letter == "") ? "ghost" : "solid"} color="warning" style={{ fontSize: "1.7vh", marginTop: "5px"}} onPress={updateDictionary}>
                     Add a Letter <IoMdAdd/>
                     </Button> 
