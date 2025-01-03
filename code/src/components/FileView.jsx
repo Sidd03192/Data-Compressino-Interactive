@@ -77,34 +77,42 @@ export const FileView = (props) => {
     const compressedArray = [];
     let count = 0;
   
-    // Compress the binary data
-    for (let i = 0; i < fileContent.length; i++) {
-      let added = false;
+    // Compression logic
+    let i = 0;
+    while (i < fileContent.length) {
+      let matchedLength = 0;
+      let matchedIndex = -1;
   
       for (let a = 0; a < props.dictionary.length; a++) {
-        // Check if the character exists in the dictionary
-        if (props.dictionary[a].key === fileContent[i]) {
-          compressedArray[i] = a.toString(2); // Replace with dictionary index in binary
-          count++;
-          added = true;
-          break; // Exit loop once found
+        const dictKey = props.dictionary[a].key;
+        if (fileContent.substring(i, i + dictKey.length) === dictKey) {
+          if (dictKey.length > matchedLength) {
+            matchedLength = dictKey.length;
+            matchedIndex = a;
+          }
         }
       }
   
-      // If not found in the dictionary, use the binary representation
-      if (!added) {
-        compressedArray[i] = binaryArray[i];
+      if (matchedLength > 0) {
+        compressedArray.push(matchedIndex.toString(2));
+        count++;
+        i += matchedLength;
+      } else {
+        compressedArray.push(binaryArray[i]);
+        i++;
       }
     }
   
     console.log("Compressed Array:", compressedArray);
     setCompressed(compressedArray);
     setCompressions(count);
-  
-    // Finalize
     setLoading(false);
+  
+    // Ensure this is being called
     onOpen();
   };
+  
+  
   
   
   
@@ -114,7 +122,6 @@ export const FileView = (props) => {
   
   return (
     <div className="h-full flex flex-col justify-start">
-      
           <Card style={{width: "100%", height:"30vh"}}>
               <CardBody style={{width: "100%", overflowX: "wrap"}}>
                   <div>
@@ -142,7 +149,6 @@ export const FileView = (props) => {
             />
           </label>
 
-          
         <div>
           <Tooltip content={(props.dictionary.length == 0)? "Dictionary can't be empty!" :"Compress File"}>
             <Button className='px-6 py-3 w-full h-full' color='secondary' variant='ghost' isDisabled={props.dictionary.length == 0 || fileContent ==""} onPress={asBinary} style={{marginLeft: "2rem"}} isLoading={loading}> Compress File <MdOutlineCompress/> </Button>

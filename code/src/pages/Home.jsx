@@ -16,7 +16,7 @@ export default function Home() {
           className="relative z-20 bg-clip-text text-transparent green_blue_gradient"
         >
           Mr. Watson
-        </span>
+          </span>
         <p 
           className="desc font-poppins text-[3vh]" 
           style={{ fontSize: "3vh"}}

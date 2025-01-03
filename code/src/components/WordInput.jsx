@@ -83,11 +83,11 @@ export default function WordInput(props) {
   const [dictionary, setDictionary] = React.useState([
     { key: "d", value: "d" },
     { key: "a", value: "a" }, 
+    {key:"program", value:"program"}
   ]);
   const [percent, setPercent] = React.useState(10);
   const [rows, setRows] = React.useState();
   const [letter, setLetter] = React.useState("");
-  const [inputType, setInputType] = React.useState(true); // true -> non file. false = file input
   const [cheat, setCheat] = useState(0);
 
   const clear = () => {
@@ -95,13 +95,10 @@ export default function WordInput(props) {
   }
   const updateDictionary = () => {
     if (letter != "") {
-      if ((dictionary.length >= 10 && inputType) ) {
+      if ((dictionary.length >= 10 ) ) {
         props.showAlert("You can't add more than 4 items to the dictionary in this input format. Please change input format / remove an item from the dictionary :) "); // calls update function in parent to send alert !
       
-      } else if (letter.length > 1) {
-        props.showAlert("Please add a character (max length = 1)")
-      }
-      
+      } 
       else {
         // logic for setting count etc...
         let add = true;
@@ -116,6 +113,9 @@ export default function WordInput(props) {
             key: letter.toLowerCase(),
             value: letter.toLowerCase(), 
           });
+          let dic = dictionary;
+          dic.sort((a, b) => a.length - b.length); 
+          setDictionary(dic);
           setCheat(letter)
         } 
         setLetter('');
@@ -163,13 +163,13 @@ export default function WordInput(props) {
                 
                 <div className="flex  justify-between mt-5" style={{ marginTop: "10px" }} >
                   <div className="flex flex-col w-full">
-                  <Input placeholder="Add to dictionary..."  variant="bordered" style={{height:"100%"}} value={letter} onValueChange={setLetter}/>     
-                    <Button  className="w-full" variant={(letter == "") ? "ghost" : "solid"} color="warning" style={{ fontSize: "1.7vh", marginTop: "5px"}} onPress={updateDictionary}>
+                  <Input placeholder="Add to dictionary..."  variant="bordered" style={{height:"100%"}} value={letter} onValueChange={setLetter} autoFocus/>     
+                    <Button  className="w-full" isDisabled={letter.length <=0}  variant={(letter == "") ? "ghost" : "solid"} color="warning" style={{ fontSize: "1.7vh", marginTop: "5px"}} onPress={updateDictionary}>
                     Add a Letter <IoMdAdd/>
                     </Button> 
                   </div>
                     <Divider orientation="vertical" style={{marginLeft: "10px", marginRight: "10px"}}></Divider>
-                    <Button className="w-3/5 h-full" variant="ghost" color="danger" style={{marginLeft: "5px", fontSize: "1.7vh", width: "40%"}} onPress={clear}>Clear Dictionary <MdClear/></Button>
+                    <Button className="w-3/5 h-full" variant="ghost" color="danger"  style={{marginLeft: "5px", fontSize: "1.7vh", width: "40%"}} onPress={clear}>Clear Dictionary <MdClear/></Button>
                   </div>
             </div>
         </div>
