@@ -15,7 +15,6 @@ export default function Home() {
       style={{ height: "93vh", flexDirection: "column" }} // Added vertical alignment styles
       >
         <div>
-      <input type="file" onChange={handleFileChange} />
     </div>
       <section className="w-full text-center">
         <span 
