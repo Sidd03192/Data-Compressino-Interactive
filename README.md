@@ -63,14 +63,8 @@ dictionary-compression-interactive/
 
 ### Running Locally  
 
-1. **Clone the Repository**  
-   ```bash  
-   git clone https://github.com/yourusername/dictionary-compression-interactive.git  
-   cd dictionary-compression-interactive  
-   ```  
-
-2. **Open in Browser**  
-   - use React dev run settings to run this project.  
+1. www.mrwatson.vercel.app
+ 
 
 ---
 
